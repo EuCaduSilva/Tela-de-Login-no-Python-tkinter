@@ -45,23 +45,28 @@ PasswordLabel.place(x=10, y=140)
 PasswordEntry = ttk.Entry(RightFrame, width=30, show="•")
 PasswordEntry.place(x=80, y=140)
 
+#logando no sistema 
+
 def Login():
 
     Usuario = UserEntry.get()
     Pass = PasswordEntry.get()
 
     #comparar entrada com Database
+    
     DataBaser.cursor.execute("""
     SELECT * FROM Users
     WHERE User = ? AND Pass = ?
     """, (Usuario, Pass))
-    print("Logado")
+
     VerifyLogin = DataBaser.cursor.fetchone()
+    
     try:
         if (Usuario in VerifyLogin and Pass in VerifyLogin):
-            messagebox.showinfo(title="Login", message="Logado com Sucesso")
+            messagebox.showinfo(title="Login", message="Logado com Sucesso")          
     except:
         messagebox.showinfo(title="Erro", message="Confira seu Cadastro")
+
 #Botões
 LoginButton = ttk.Button(RightFrame, text="Login", width=20, command=Login)
 LoginButton.place(x=105, y=190)
